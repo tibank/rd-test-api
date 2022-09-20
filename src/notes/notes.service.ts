@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { DatastoreService } from 'src/datastore/datastore.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 
 @Injectable()
 export class NotesService {
+  constructor(private dataStore: DatastoreService) {}
+
   create(createNoteDto: CreateNoteDto) {
     return 'This action adds a new note';
   }
 
   findAll() {
-    return `This action returns all notes`;
+    return this.dataStore.notes;
   }
 
   findOne(id: number) {
