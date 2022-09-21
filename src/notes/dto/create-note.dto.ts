@@ -1,5 +1,7 @@
+import { Category } from '../entities/category.entyty';
+
 export class CreateNoteDto {
   name: string;
-  category: number;
+  category: Category;
   content: string;
 }

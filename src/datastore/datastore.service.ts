@@ -6,19 +6,27 @@ import { Note } from 'src/notes/entities/note.entity';
 
 @Injectable()
 export class DatastoreService {
-  public readonly categories: Category[];
-  public readonly notes: Note[];
+  public categories: Category[];
+  public notes: Note[];
 
   constructor() {
-    this.notes = this.loadNotes();
     this.categories = this.loadCategories();
+    this.notes = this.loadNotes();
   }
 
   loadCategories(): Category[] {
+    //categoriesMocked.forEach((x) => this.categories.push(x));
     return categoriesMocked;
   }
 
   loadNotes(): Note[] {
+    const arr = [];
+    notesMocked.forEach((elem) => {
+      const category = this.categories.find((x) => x.id === elem.category.id);
+      if (category) {
+        elem.category = category;
+      }
+    });
     return notesMocked;
   }
 }
